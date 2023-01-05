@@ -1,7 +1,12 @@
 import { useState } from "react";
 
+import {
+  createAuthUserWithEmailAndPassword,
+  createUserDocumentFromAuth,
+} from "../../utils/firebase/firebase.utils";
+
 const defaultFormFields = {
-  userName: "",
+  displayName: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -9,8 +14,37 @@ const defaultFormFields = {
 
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { userName, email, password, confirmPassword } = formFields;
-  console.log(formFields);
+  const { displayName, email, password, confirmPassword } = formFields;
+
+  const resetFormFields = () => {
+    setFormFields(defaultFormFields);
+  };
+
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("passwords do not match");
+      return;
+    }
+
+    try {
+      const { user } = await createAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
+
+      await createUserDocumentFromAuth(user, { displayName });
+      resetFormFields();
+    } catch (err) {
+      if (err.code === "auth/email-already-in-use") {
+        alert("Cannot create user: email already in use");
+      } else {
+        console.error("user creation encountered an error", err.message);
+      }
+    }
+  };
+
   const handleChange = (evt) => {
     const { name, value } = evt.target;
 
@@ -20,12 +54,12 @@ const SignUpForm = () => {
   return (
     <div>
       <h1>Sign up with email and password</h1>
-      <form onSubmit={() => {}}>
-        <label>Username</label>
+      <form onSubmit={handleSubmit}>
+        <label>Display Name</label>
         <input
           type="text"
-          name="userName"
-          value={userName}
+          name="displayName"
+          value={displayName}
           required
           onChange={handleChange}
         />
