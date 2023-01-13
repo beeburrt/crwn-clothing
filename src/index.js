@@ -7,7 +7,7 @@ import { UserProvider } from "./contexts/user.context";
 
 import "./index.scss";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("‼")).render(
   <BrowserRouter>
     <UserProvider>
       <App />
