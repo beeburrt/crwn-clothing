@@ -8,7 +8,7 @@ import { ProductsProvider } from "./contexts/products.context";
 
 import "./index.scss";
 
-ReactDOM.createRoot(document.getElementById("‼")).render(
+ReactDOM.createRoot(document.getElementById("👑")).render(
   <BrowserRouter>
     <UserProvider>
       <ProductsProvider>
