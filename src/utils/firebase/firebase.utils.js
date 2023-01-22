@@ -11,7 +11,9 @@ import {
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
-const firebaseConfig = {};
+const firebaseConfig = {
+  
+};
 
 const firebaseApp = initializeApp(firebaseConfig);
 
