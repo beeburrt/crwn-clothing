@@ -5,6 +5,7 @@
   height: 350px;
   align-items: center;
   position: relative;
+  font-family: inherit;
 
   img {
     width: 100%;
@@ -40,12 +41,7 @@
     font-size: 18px;
 
     .name {
-      width: 90%;
       margin-bottom: 15px;
-    }
-
-    .price {
-      width: 10%;
     }
   }
 }
